@@ -1,0 +1,57 @@
+# Runs the full test suite headless on every push and pull request.
+# No GPU or display is needed: Qt runs offscreen and VTK renders
+# off-screen (OSMesa is pulled in by the libosmesa6 package below).
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    env:
+      QT_QPA_PLATFORM: offscreen
+      PYVISTA_OFF_SCREEN: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: System libraries for Qt and VTK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libgl1 libxkbcommon0 libdbus-1-3 libosmesa6 xvfb
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+      - name: Command-line tool smoke test
+        run: |
+          the-void-analyze "tests/fixtures/identity/2020[Zn][dia]3[ASR]1.cif" --out cli_out --samples 200 --raspa --figures
+          the-void-figures cli_out --hist pld_A --formats pdf
+          the-void-functionalize "tests/fixtures/coremof/2010[Cr][bpq]3[ASR]1.cif" --groups NH2 --out fn_out
+          python -c "import thevoid; print(thevoid.load('tests/fixtures/identity/2020[Zn][dia]3[ASR]1.cif').pores().pld_A)"
+          the-void-train list
+          the-void-index init idx --name CI && the-void-index add idx cli_out --contributor CI && the-void-index build idx && the-void-index verify idx
+          the-void-analyze "tests/fixtures/identity/2020[Zn][dia]3[ASR]1.cif" --out ml_out --samples 200 --no-topology --predict water_stability
+      # Round 52: the RASPA2 export's end-to-end tests run the real
+      # program. Built from the PyPI source (about 20 s); without it
+      # those tests are skipped, not failed.
+      - name: RASPA2
+        run: |
+          pip download RASPA2==2.0.4 --no-deps --no-binary :all: -d /tmp/raspa
+          tar xzf /tmp/raspa/RASPA2-2.0.4.tar.gz -C /tmp/raspa
+          gcc -O2 -w -fcommon -I/tmp/raspa/RASPA2-2.0.4/src /tmp/raspa/RASPA2-2.0.4/src/*.c -lm -o /tmp/raspa/simulate
+          echo "RASPA_SIMULATE=/tmp/raspa/simulate" >> "$GITHUB_ENV"
+          # Round 53: its bundled MOF and zeolite CIFs validate topology
+          # identification (tests/test_topology_real_structures.py).
+          echo "RASPA_STRUCTURES=/tmp/raspa/RASPA2-2.0.4/structures" >> "$GITHUB_ENV"
+      - name: Tests
+        run: xvfb-run -a python -m pytest -q -rs

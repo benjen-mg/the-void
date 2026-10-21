@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: >-
+  If you use the Void, or numbers it produced, in work you publish, please
+  cite it as below. Please also cite the methods behind the numbers you
+  report: Help > About the Void lists them.
+title: "the Void"
+type: software
+authors:
+  - given-names: Benyamin M.
+    family-names: Garmejani
+    affiliation: "Victoria University of Wellington"
+version: "1.0.0"
+date-released: "2026-10-22"
+license: CC-BY-NC-ND-4.0
+abstract: >-
+  Desktop software for crystal structures and porous materials: 3D
+  viewing and measurement, pore size, accessible surface area, guest
+  accessibility, open metal sites, topology, powder XRD, RASPA2 input
+  sets, comparison with CoRE MOF 2024, and property models.
+keywords:
+  - metal-organic frameworks
+  - porous materials
+  - crystallography
+  - pore analysis
+  - topology
+repository-code: "https://github.com/benjen-mg/the-void"

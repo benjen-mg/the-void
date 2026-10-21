@@ -1,0 +1,309 @@
+{
+ "_comment": "Recorded-format MOFX-DB /mofs.json responses for tests (round 56). Field names and structure follow https://mof.tech.northwestern.edu/api and the mofdb_client 0.10.0 parser; hMOF-1's id, lcd, pld, void fraction, surface areas, mofid, mofkey, hashkey and mofdb_version were read from the live service in September 2026 through a summarising web reader, so may not be exact; no test depends on them being so. The CIF is a STAND-IN (CoRE MOF 2024's 2010[Cr][bpq]3[ASR]1, from tests/fixtures/coremof, CC-BY-4.0), and the isotherm points are placeholders: the live service could not be reached from where these tests were written.",
+ "pages": 2,
+ "page": 1,
+ "results": [
+  {
+   "id": 15344,
+   "name": "hMOF-1",
+   "cif": "# DDEC6 charges by PACMAN v1.1 (https://github.com/mtap-research/PACMAN-charge/)\ndata_2010[Cr][bpq]3[ASR]1\n_chemical_formula_sum              \"Cr2 H8 C16 O10\"\n_cell_length_a       11.1912\n_cell_length_b       11.1912\n_cell_length_c       11.1912\n_cell_angle_alpha    144.374\n_cell_angle_beta     108.07\n_cell_angle_gamma    82.9338\n\n_symmetry_space_group_name_H-M    \"P 1\"\n_symmetry_Int_Tables_number       1\n\nloop_\n  _symmetry_equiv_pos_as_xyz\n  'x, y, z'\n\nloop_\n  _atom_site_type_symbol\n  _atom_site_label\n  _atom_site_symmetry_multiplicity\n  _atom_site_fract_x\n  _atom_site_fract_y\n  _atom_site_fract_z\n  _atom_site_occupancy\n  _atom_site_charge\nCr  Cr1       1.0  0.00000  0.00000  0.50000  1.0000 1.5962268886\nCr  Cr2       1.0  0.00000  0.50000  0.00000  1.0000 1.5962268886\nH   H1        1.0  0.00100  0.25400  0.36700  1.0000 0.1109603372\nH   H2        1.0  0.61300  0.24600  0.74700  1.0000 0.1109603372\nH   H3        1.0  0.38700  0.13400  0.63300  1.0000 0.1109603372\nH   H4        1.0  0.99900  0.36600  0.25300  1.0000 0.1109603372\nH   H5        1.0  0.99900  0.74600  0.63300  1.0000 0.1109603372\nH   H6        1.0  0.38700  0.75400  0.25300  1.0000 0.1109603372\nH   H7        1.0  0.61300  0.86600  0.36700  1.0000 0.1109603372\nH   H8        1.0  0.00100  0.63400  0.74700  1.0000 0.1109603372\nC   C1        1.0  0.00100  0.79900  0.86600  1.0000 -0.0970852208\nC   C2        1.0  0.56700  0.70100  0.20200  1.0000 -0.0970852208\nC   C3        1.0  0.43300  0.63500  0.13400  1.0000 -0.0970852208\nC   C4        1.0  0.99900  0.86500  0.79800  1.0000 -0.0970852208\nC   C5        1.0  0.99900  0.20100  0.13400  1.0000 -0.0970852208\nC   C6        1.0  0.43300  0.29900  0.79800  1.0000 -0.0970852208\nC   C7        1.0  0.56700  0.36500  0.86600  1.0000 -0.0970852208\nC   C8        1.0  0.00100  0.13500  0.20200  1.0000 -0.0970852208\nC   C9        1.0  0.99500  0.93100  0.06400  1.0000 -0.0107762414\nC   C10       1.0  0.98900  0.85800  0.13100  1.0000 0.6027289209\nC   C11       1.0  0.63300  0.56900  0.06400  1.0000 -0.0107762414\nC   C12       1.0  0.77300  0.64200  0.13100  1.0000 0.6027289209\nC   C13       1.0  0.36700  0.43100  0.93600  1.0000 -0.0107762414\nC   C14       1.0  0.22700  0.35800  0.86900  1.0000 0.6027289209\nC   C15       1.0  0.00500  0.06900  0.93600  1.0000 -0.0107762414\nC   C16       1.0  0.01100  0.14200  0.86900  1.0000 0.6027289209\nO   O1        1.0  0.99200  0.98900  0.31100  1.0000 -0.4790172475\nO   O2        1.0  0.82200  0.51100  0.00300  1.0000 -0.4790172475\nO   O3        1.0  0.17800  0.18100  0.68900  1.0000 -0.4790172475\nO   O4        1.0  0.00800  0.31900  0.99700  1.0000 -0.4790172475\nO   O5        1.0  0.00800  0.01100  0.68900  1.0000 -0.4790172475\nO   O6        1.0  0.17800  0.48900  0.99700  1.0000 -0.4790172475\nO   O7        1.0  0.82200  0.81900  0.31100  1.0000 -0.4790172475\nO   O8        1.0  0.99200  0.68100  0.00300  1.0000 -0.4790172475\nO   O9        1.0  0.05000  0.75000  0.30000  1.0000 -0.9195637229\nO   O10       1.0  0.95000  0.25000  0.70000  1.0000 -0.9195637229\n",
+   "lcd": 4.75,
+   "pld": 3.25,
+   "url": "/mofs/15344.json",
+   "pxrd": null,
+   "heats": [],
+   "mofid": "[O-]C(=O)c1ccc(cc1)C(=O)[O-].[Zn][O]([Zn])([Zn])[Zn] MOFid-v1.pcu.cat1",
+   "mofkey": "Zn.KKEYFWRCBNTPAC.MOFkey-v1.pcu",
+   "hashkey": "fe2f06079589eb25d37613462a0e7e0aecd418c8214c77b0c6",
+   "database": "hMOF",
+   "elements": [
+    {
+     "symbol": "Zn",
+     "name": "Zinc"
+    },
+    {
+     "symbol": "O",
+     "name": "Oxygen"
+    },
+    {
+     "symbol": "C",
+     "name": "Carbon"
+    },
+    {
+     "symbol": "H",
+     "name": "Hydrogen"
+    }
+   ],
+   "isotherms": [
+    {
+     "id": 153441,
+     "isotherm_data": [
+      {
+       "pressure": 0.1,
+       "total_adsorption": 1.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "CarbonDioxide",
+         "composition": 1.0,
+         "adsorption": 1.0
+        }
+       ]
+      },
+      {
+       "pressure": 1.0,
+       "total_adsorption": 2.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "CarbonDioxide",
+         "composition": 1.0,
+         "adsorption": 2.0
+        }
+       ]
+      }
+     ],
+     "batch_number": null,
+     "adsorbates": [
+      {
+       "id": 1,
+       "InChIKey": "X",
+       "name": "CarbonDioxide",
+       "InChICode": "InChI=X",
+       "formula": "X"
+      }
+     ],
+     "digitizer": "",
+     "simin": "",
+     "DOI": "10.1038/nchem.1192",
+     "date": "2012-01-01",
+     "temperature": 298,
+     "adsorbent_forcefield": "UFF",
+     "molecule_forcefield": "TraPPE",
+     "adsorbent": {
+      "id": 1,
+      "name": "hMOF-1"
+     },
+     "category": "sim",
+     "adsorptionUnits": "cm3(STP)/g",
+     "pressureUnits": "bar",
+     "compositionType": "molefraction",
+     "isotherm_url": "/isotherms/153441.json"
+    },
+    {
+     "id": 153442,
+     "isotherm_data": [
+      {
+       "pressure": 0.1,
+       "total_adsorption": 1.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "Methane",
+         "composition": 1.0,
+         "adsorption": 1.0
+        }
+       ]
+      },
+      {
+       "pressure": 1.0,
+       "total_adsorption": 2.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "Methane",
+         "composition": 1.0,
+         "adsorption": 2.0
+        }
+       ]
+      }
+     ],
+     "batch_number": null,
+     "adsorbates": [
+      {
+       "id": 1,
+       "InChIKey": "X",
+       "name": "Methane",
+       "InChICode": "InChI=X",
+       "formula": "X"
+      }
+     ],
+     "digitizer": "",
+     "simin": "",
+     "DOI": "10.1038/nchem.1192",
+     "date": "2012-01-01",
+     "temperature": 298,
+     "adsorbent_forcefield": "UFF",
+     "molecule_forcefield": "TraPPE",
+     "adsorbent": {
+      "id": 1,
+      "name": "hMOF-1"
+     },
+     "category": "sim",
+     "adsorptionUnits": "cm3(STP)/g",
+     "pressureUnits": "bar",
+     "compositionType": "molefraction",
+     "isotherm_url": "/isotherms/153442.json"
+    }
+   ],
+   "adsorbates": [],
+   "batch_number": null,
+   "mofdb_version": "dc8a0295db",
+   "void_fraction": 0.388986,
+   "surface_area_m2g": 580.7,
+   "surface_area_m2cm3": 714.8,
+   "pore_size_distribution": null
+  },
+  {
+   "id": 15345,
+   "name": "hMOF-2",
+   "cif": "",
+   "lcd": 5.1,
+   "pld": 3.9,
+   "url": "/mofs/15345.json",
+   "pxrd": null,
+   "heats": [],
+   "mofid": "[O-]C(=O)c1ccc(cc1)C(=O)[O-].[Zn][O]([Zn])([Zn])[Zn] MOFid-v1.pcu.cat1",
+   "mofkey": "Zn.KKEYFWRCBNTPAC.MOFkey-v1.pcu",
+   "hashkey": "fe2f06079589eb25d37613462a0e7e0aecd418c8214c77b0c6",
+   "database": "hMOF",
+   "elements": [
+    {
+     "symbol": "Zn",
+     "name": "Zinc"
+    },
+    {
+     "symbol": "O",
+     "name": "Oxygen"
+    },
+    {
+     "symbol": "C",
+     "name": "Carbon"
+    },
+    {
+     "symbol": "H",
+     "name": "Hydrogen"
+    }
+   ],
+   "isotherms": [
+    {
+     "id": 153451,
+     "isotherm_data": [
+      {
+       "pressure": 0.1,
+       "total_adsorption": 1.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "CarbonDioxide",
+         "composition": 1.0,
+         "adsorption": 1.0
+        }
+       ]
+      },
+      {
+       "pressure": 1.0,
+       "total_adsorption": 2.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "CarbonDioxide",
+         "composition": 1.0,
+         "adsorption": 2.0
+        }
+       ]
+      }
+     ],
+     "batch_number": null,
+     "adsorbates": [
+      {
+       "id": 1,
+       "InChIKey": "X",
+       "name": "CarbonDioxide",
+       "InChICode": "InChI=X",
+       "formula": "X"
+      }
+     ],
+     "digitizer": "",
+     "simin": "",
+     "DOI": "10.1038/nchem.1192",
+     "date": "2012-01-01",
+     "temperature": 298,
+     "adsorbent_forcefield": "UFF",
+     "molecule_forcefield": "TraPPE",
+     "adsorbent": {
+      "id": 1,
+      "name": "hMOF-1"
+     },
+     "category": "sim",
+     "adsorptionUnits": "cm3(STP)/g",
+     "pressureUnits": "bar",
+     "compositionType": "molefraction",
+     "isotherm_url": "/isotherms/153451.json"
+    },
+    {
+     "id": 153452,
+     "isotherm_data": [
+      {
+       "pressure": 0.1,
+       "total_adsorption": 1.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "Methane",
+         "composition": 1.0,
+         "adsorption": 1.0
+        }
+       ]
+      },
+      {
+       "pressure": 1.0,
+       "total_adsorption": 2.0,
+       "species_data": [
+        {
+         "InChIKey": "X",
+         "name": "Methane",
+         "composition": 1.0,
+         "adsorption": 2.0
+        }
+       ]
+      }
+     ],
+     "batch_number": null,
+     "adsorbates": [
+      {
+       "id": 1,
+       "InChIKey": "X",
+       "name": "Methane",
+       "InChICode": "InChI=X",
+       "formula": "X"
+      }
+     ],
+     "digitizer": "",
+     "simin": "",
+     "DOI": "10.1038/nchem.1192",
+     "date": "2012-01-01",
+     "temperature": 298,
+     "adsorbent_forcefield": "UFF",
+     "molecule_forcefield": "TraPPE",
+     "adsorbent": {
+      "id": 1,
+      "name": "hMOF-1"
+     },
+     "category": "sim",
+     "adsorptionUnits": "cm3(STP)/g",
+     "pressureUnits": "bar",
+     "compositionType": "molefraction",
+     "isotherm_url": "/isotherms/153452.json"
+    }
+   ],
+   "adsorbates": [],
+   "batch_number": null,
+   "mofdb_version": "dc8a0295db",
+   "void_fraction": 0.388986,
+   "surface_area_m2g": 580.7,
+   "surface_area_m2cm3": 714.8,
+   "pore_size_distribution": null
+  }
+ ]
+}

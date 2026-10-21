@@ -1,0 +1,14 @@
+-r requirements.txt
+
+pytest>=8.0
+pytest-qt>=4.4
+black>=24.0
+ruff>=0.5
+mypy>=1.10
+
+# Optional for the Void itself; installed here so the tests cover them
+# (round 60: thevoid's ASE input and to_dataframe()).
+ase>=3.23
+pandas>=2.0
+# Round 61: the property models.
+scikit-learn>=1.4

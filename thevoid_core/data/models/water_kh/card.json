@@ -1,0 +1,155 @@
+{
+ "caveat": "Trained on CoRE MOF 2024's Widom-insertion values (UFF4MOF/TIP4P); that the first Widom value is water's is inferred from the data.",
+ "training_data": {
+  "database": "CoRE MOF 2024 (computation-ready subset)",
+  "citation": "G. Zhao, L. Brabson, S. Chheda, J. Huang, H. Kim, K. Liu et al., CoRE MOF DB: a curated experimental metal-organic framework database with machine-learned properties for integrated material-process screening, Matter 8, 102140 (2025)",
+  "doi": "10.1016/j.matt.2025.102140",
+  "licence": "CC-BY-4.0",
+  "index_sha256": "5273f40521a3bb27576b9c303b545a386151f0523e4b70c5f01df629f1778a94",
+  "linker_table": "coremof2024_linkers.json.gz"
+ },
+ "convention": "descriptors computed as CoRE MOF 2024: Zeo++'s CCDC radii, 1.655 \u00c5 probe (the Void: radii='ccdc')",
+ "trained": "2026-09-30T19:48:39+13:00",
+ "rows": {
+  "train": 12062,
+  "calibration": 1712,
+  "test": 3426,
+  "groups": 9929
+ },
+ "recipe": {
+  "ensemble_size": 5,
+  "subsample": 0.8,
+  "hyperparameters": {
+   "max_iter": 200,
+   "learning_rate": 0.1,
+   "max_leaf_nodes": 31,
+   "min_samples_leaf": 20,
+   "l2_regularization": 0.0
+  },
+  "split": "70/10/20 by group",
+  "seed": 0,
+  "interval": "90% split conformal, normalised by the ensemble spread",
+  "domain": "mean distance to 5 nearest training rows (standardised) above their 95th percentile"
+ },
+ "test_metrics": {
+  "n": 3426,
+  "mae": 1.085336986227343,
+  "rmse": 1.6838530390344617,
+  "r2": 0.7272746343354268,
+  "spearman": 0.7324991483721656,
+  "interval_coverage": 0.9124343257443083,
+  "baseline_mae": 2.168247887329195,
+  "inside_domain_fraction": 0.9319906596614127,
+  "mae_inside_domain": 1.036018789674426,
+  "mae_outside_domain": 1.7611867784739705
+ },
+ "features_without_values": [],
+ "metrics_scale": "log10 of the target",
+ "most_important_features": [
+  [
+   "has_oms",
+   0.697421
+  ],
+  [
+   "has_lanthanide",
+   0.556253
+  ],
+  [
+   "metal_group_max",
+   0.23143
+  ],
+  [
+   "lcd_A",
+   0.134578
+  ],
+  [
+   "density_g_cm3",
+   0.125998
+  ],
+  [
+   "linker_O_fraction",
+   0.121449
+  ],
+  [
+   "linker_N_fraction",
+   0.09153
+  ],
+  [
+   "mean_atomic_mass",
+   0.091187
+  ]
+ ],
+ "training_seconds": 11.5,
+ "name": "water_kh",
+ "label": "Water Henry coefficient (298 K)",
+ "unit": "mmol/g/Pa",
+ "target": "water_kh_mmol_g_pa",
+ "transform": "log10",
+ "descriptor_set": "coremof-v1",
+ "features": [
+  "lcd_A",
+  "pld_A",
+  "asa_m2_g",
+  "nasa_m2_g",
+  "density_g_cm3",
+  "mean_atomic_mass",
+  "dimension",
+  "catenation",
+  "has_oms",
+  "n_metal_species",
+  "metal_Z_max",
+  "metal_Z_min",
+  "metal_electronegativity_mean",
+  "metal_row_max",
+  "metal_group_max",
+  "has_lanthanide",
+  "has_alkali_or_alkaline_earth",
+  "linker_N_fraction",
+  "linker_O_fraction",
+  "linker_F_fraction",
+  "linker_Cl_fraction",
+  "linker_Br_fraction",
+  "linker_S_fraction",
+  "linker_P_fraction",
+  "linker_types",
+  "linker_heavy_atoms_max",
+  "net_pcu",
+  "net_dia",
+  "net_sql",
+  "net_pts",
+  "net_hcb",
+  "net_rtl",
+  "net_bpq",
+  "net_srs",
+  "net_flu",
+  "net_kgd",
+  "net_nbo",
+  "net_ths",
+  "net_tbo",
+  "net_sod",
+  "net_bcu",
+  "net_other",
+  "net_unstable"
+ ],
+ "nets": [
+  "pcu",
+  "dia",
+  "sql",
+  "pts",
+  "hcb",
+  "rtl",
+  "bpq",
+  "srs",
+  "flu",
+  "kgd",
+  "nbo",
+  "ths",
+  "tbo",
+  "sod",
+  "bcu"
+ ],
+ "k": 4.953164271674336,
+ "s0": 0.219476446081459,
+ "domain_threshold": 4.292158042296878,
+ "sklearn_version": "1.9.1"
+}

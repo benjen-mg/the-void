@@ -1,0 +1,155 @@
+{
+ "caveat": "Trained on CoRE MOF 2024's thermal stabilities, which are themselves ML predictions, not measurements.",
+ "training_data": {
+  "database": "CoRE MOF 2024 (computation-ready subset)",
+  "citation": "G. Zhao, L. Brabson, S. Chheda, J. Huang, H. Kim, K. Liu et al., CoRE MOF DB: a curated experimental metal-organic framework database with machine-learned properties for integrated material-process screening, Matter 8, 102140 (2025)",
+  "doi": "10.1016/j.matt.2025.102140",
+  "licence": "CC-BY-4.0",
+  "index_sha256": "5273f40521a3bb27576b9c303b545a386151f0523e4b70c5f01df629f1778a94",
+  "linker_table": "coremof2024_linkers.json.gz"
+ },
+ "convention": "descriptors computed as CoRE MOF 2024: Zeo++'s CCDC radii, 1.655 \u00c5 probe (the Void: radii='ccdc')",
+ "trained": "2026-09-30T19:48:48+13:00",
+ "rows": {
+  "train": 11405,
+  "calibration": 1618,
+  "test": 3243,
+  "groups": 9162
+ },
+ "recipe": {
+  "ensemble_size": 5,
+  "subsample": 0.8,
+  "hyperparameters": {
+   "max_iter": 200,
+   "learning_rate": 0.1,
+   "max_leaf_nodes": 31,
+   "min_samples_leaf": 20,
+   "l2_regularization": 0.0
+  },
+  "split": "70/10/20 by group",
+  "seed": 0,
+  "interval": "90% split conformal, normalised by the ensemble spread",
+  "domain": "mean distance to 5 nearest training rows (standardised) above their 95th percentile"
+ },
+ "test_metrics": {
+  "n": 3243,
+  "mae": 30.119184927511856,
+  "rmse": 40.85356835691844,
+  "r2": 0.5987258818454815,
+  "spearman": 0.7242695478663819,
+  "interval_coverage": 0.9124267653407339,
+  "baseline_mae": 50.015878532699105,
+  "inside_domain_fraction": 0.940795559666975,
+  "mae_inside_domain": 29.22904571405527,
+  "mae_outside_domain": 44.26405336634545
+ },
+ "features_without_values": [],
+ "metrics_scale": "the target",
+ "most_important_features": [
+  [
+   "metal_electronegativity_mean",
+   9.130571
+  ],
+  [
+   "linker_O_fraction",
+   8.177728
+  ],
+  [
+   "linker_N_fraction",
+   6.954179
+  ],
+  [
+   "linker_heavy_atoms_max",
+   4.617377
+  ],
+  [
+   "mean_atomic_mass",
+   4.451312
+  ],
+  [
+   "lcd_A",
+   2.925419
+  ],
+  [
+   "metal_Z_max",
+   2.882536
+  ],
+  [
+   "pld_A",
+   2.712127
+  ]
+ ],
+ "training_seconds": 8.7,
+ "name": "thermal_stability",
+ "label": "Thermal decomposition temperature",
+ "unit": "\u00b0C",
+ "target": "stability_thermal_C",
+ "transform": "none",
+ "descriptor_set": "coremof-v1",
+ "features": [
+  "lcd_A",
+  "pld_A",
+  "asa_m2_g",
+  "nasa_m2_g",
+  "density_g_cm3",
+  "mean_atomic_mass",
+  "dimension",
+  "catenation",
+  "has_oms",
+  "n_metal_species",
+  "metal_Z_max",
+  "metal_Z_min",
+  "metal_electronegativity_mean",
+  "metal_row_max",
+  "metal_group_max",
+  "has_lanthanide",
+  "has_alkali_or_alkaline_earth",
+  "linker_N_fraction",
+  "linker_O_fraction",
+  "linker_F_fraction",
+  "linker_Cl_fraction",
+  "linker_Br_fraction",
+  "linker_S_fraction",
+  "linker_P_fraction",
+  "linker_types",
+  "linker_heavy_atoms_max",
+  "net_pcu",
+  "net_dia",
+  "net_sql",
+  "net_pts",
+  "net_hcb",
+  "net_rtl",
+  "net_bpq",
+  "net_srs",
+  "net_flu",
+  "net_kgd",
+  "net_nbo",
+  "net_ths",
+  "net_tbo",
+  "net_sod",
+  "net_bcu",
+  "net_other",
+  "net_unstable"
+ ],
+ "nets": [
+  "pcu",
+  "dia",
+  "sql",
+  "pts",
+  "hcb",
+  "rtl",
+  "bpq",
+  "srs",
+  "flu",
+  "kgd",
+  "nbo",
+  "ths",
+  "tbo",
+  "sod",
+  "bcu"
+ ],
+ "k": 5.137112705395972,
+ "s0": 6.501752848281861,
+ "domain_threshold": 4.439572860218203,
+ "sklearn_version": "1.9.1"
+}

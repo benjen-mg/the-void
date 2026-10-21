@@ -1,0 +1,391 @@
+{
+ "method": "Saturated coordination number per metal group, chosen on half of CoRE MOF 2024's SI structures (split by paper, DOI) to agree best with CoRE's oms_metals (balanced accuracy; ties: accuracy, then the smaller number). The geometric test is unchanged. Agreement is reported on the other half. See tools/calibrate_oms.py.",
+ "labels": "CoRE MOF 2024 oms_metals (CC-BY-4.0)",
+ "thresholds": {
+  "asymmetry": 0.15,
+  "widest_empty_cone_deg": 80.0
+ },
+ "min_items_per_half": 10,
+ "groups": {
+  "Ag": {
+   "metals": [
+    "Ag"
+   ],
+   "metals_seen": [
+    "Ag"
+   ],
+   "saturated_coordination": 5,
+   "calibration": {
+    "items": 21,
+    "agreement": 0.619,
+    "balanced_accuracy": 0.7647,
+    "open_agreed": "9/17",
+    "saturated_agreed": "4/4"
+   },
+   "held_out": {
+    "items": 20,
+    "agreement": 0.9,
+    "balanced_accuracy": 0.9474,
+    "open_agreed": "17/19",
+    "saturated_agreed": "1/1"
+   },
+   "calibration_curve": {
+    "2": 0.5588,
+    "3": 0.6765,
+    "4": 0.7059,
+    "5": 0.7647,
+    "6": 0.5147,
+    "7": 0.5147,
+    "8": 0.5735,
+    "9": 0.5735,
+    "10": 0.5735,
+    "11": 0.5735,
+    "12": 0.5735
+   }
+  },
+  "In": {
+   "metals": [
+    "In"
+   ],
+   "metals_seen": [
+    "In"
+   ],
+   "saturated_coordination": 7,
+   "calibration": {
+    "items": 32,
+    "agreement": 1.0,
+    "balanced_accuracy": 1.0,
+    "open_agreed": "3/3",
+    "saturated_agreed": "29/29"
+   },
+   "held_out": {
+    "items": 26,
+    "agreement": 1.0,
+    "balanced_accuracy": 1.0,
+    "open_agreed": "1/1",
+    "saturated_agreed": "25/25"
+   },
+   "calibration_curve": {
+    "2": 0.5,
+    "3": 0.5,
+    "4": 0.5,
+    "5": 0.5,
+    "6": 0.6667,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0
+   }
+  },
+  "actinides": {
+   "metals": [
+    "Th",
+    "U",
+    "Np",
+    "Pu"
+   ],
+   "metals_seen": [
+    "Np",
+    "Th",
+    "U"
+   ],
+   "saturated_coordination": 7,
+   "calibration": {
+    "items": 12,
+    "agreement": 1.0,
+    "balanced_accuracy": 1.0,
+    "open_agreed": "3/3",
+    "saturated_agreed": "9/9"
+   },
+   "held_out": {
+    "items": 15,
+    "agreement": 1.0,
+    "balanced_accuracy": 1.0,
+    "open_agreed": "5/5",
+    "saturated_agreed": "10/10"
+   },
+   "calibration_curve": {
+    "2": 0.6667,
+    "3": 0.6667,
+    "4": 0.6667,
+    "5": 0.6667,
+    "6": 0.6667,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0
+   }
+  },
+  "lanthanides and Y": {
+   "metals": [
+    "La",
+    "Ce",
+    "Pr",
+    "Nd",
+    "Pm",
+    "Sm",
+    "Eu",
+    "Gd",
+    "Tb",
+    "Dy",
+    "Ho",
+    "Er",
+    "Tm",
+    "Yb",
+    "Lu",
+    "Y"
+   ],
+   "metals_seen": [
+    "Ce",
+    "Dy",
+    "Er",
+    "Eu",
+    "Gd",
+    "Ho",
+    "La",
+    "Lu",
+    "Nd",
+    "Pr",
+    "Sm",
+    "Tb",
+    "Tm",
+    "Y",
+    "Yb"
+   ],
+   "saturated_coordination": 9,
+   "calibration": {
+    "items": 249,
+    "agreement": 0.8956,
+    "balanced_accuracy": 0.8829,
+    "open_agreed": "67/79",
+    "saturated_agreed": "156/170"
+   },
+   "held_out": {
+    "items": 157,
+    "agreement": 0.879,
+    "balanced_accuracy": 0.8416,
+    "open_agreed": "38/52",
+    "saturated_agreed": "100/105"
+   },
+   "calibration_curve": {
+    "2": 0.5,
+    "3": 0.5,
+    "4": 0.5127,
+    "5": 0.5253,
+    "6": 0.5316,
+    "7": 0.684,
+    "8": 0.8313,
+    "9": 0.8829,
+    "10": 0.8829,
+    "11": 0.8829,
+    "12": 0.8829
+   }
+  }
+ },
+ "held_out_new_metals": {
+  "items": 218,
+  "agreement": 0.9037,
+  "balanced_accuracy": 0.8784,
+  "open_agreed": "61/77",
+  "saturated_agreed": "136/141"
+ },
+ "held_out_metals_checked_before": {
+  "items": 1101,
+  "agreement": 0.8029,
+  "balanced_accuracy": 0.7722,
+  "open_agreed": "263/472",
+  "saturated_agreed": "621/629"
+ },
+ "held_out_metals_checked_before_by_metal": {
+  "Al": {
+   "items": 13,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "1/1",
+   "saturated_agreed": "12/12"
+  },
+  "Cd": {
+   "items": 145,
+   "agreement": 0.8759,
+   "balanced_accuracy": 0.7907,
+   "open_agreed": "25/43",
+   "saturated_agreed": "102/102"
+  },
+  "Co": {
+   "items": 197,
+   "agreement": 0.9188,
+   "balanced_accuracy": 0.8488,
+   "open_agreed": "33/46",
+   "saturated_agreed": "148/151"
+  },
+  "Cr": {
+   "items": 16,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "7/7",
+   "saturated_agreed": "9/9"
+  },
+  "Cu": {
+   "items": 187,
+   "agreement": 0.738,
+   "balanced_accuracy": 0.7802,
+   "open_agreed": "67/114",
+   "saturated_agreed": "71/73"
+  },
+  "Fe": {
+   "items": 35,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "9/9",
+   "saturated_agreed": "26/26"
+  },
+  "Ga": {
+   "items": 7,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "0/0",
+   "saturated_agreed": "7/7"
+  },
+  "Hf": {
+   "items": 4,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "2/2",
+   "saturated_agreed": "2/2"
+  },
+  "Mg": {
+   "items": 23,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "6/6",
+   "saturated_agreed": "17/17"
+  },
+  "Mn": {
+   "items": 40,
+   "agreement": 0.975,
+   "balanced_accuracy": 0.95,
+   "open_agreed": "9/10",
+   "saturated_agreed": "30/30"
+  },
+  "Ni": {
+   "items": 50,
+   "agreement": 0.96,
+   "balanced_accuracy": 0.9545,
+   "open_agreed": "20/22",
+   "saturated_agreed": "28/28"
+  },
+  "Sc": {
+   "items": 4,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "2/2",
+   "saturated_agreed": "2/2"
+  },
+  "Ti": {
+   "items": 10,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "0/0",
+   "saturated_agreed": "10/10"
+  },
+  "V": {
+   "items": 4,
+   "agreement": 1.0,
+   "balanced_accuracy": 1.0,
+   "open_agreed": "0/0",
+   "saturated_agreed": "4/4"
+  },
+  "Zn": {
+   "items": 328,
+   "agreement": 0.6037,
+   "balanced_accuracy": 0.6626,
+   "open_agreed": "66/194",
+   "saturated_agreed": "132/134"
+  },
+  "Zr": {
+   "items": 38,
+   "agreement": 0.9737,
+   "balanced_accuracy": 0.9773,
+   "open_agreed": "16/16",
+   "saturated_agreed": "21/22"
+  }
+ },
+ "not_calibrated": {
+  "Au": {
+   "items": 2,
+   "calibration_half": 0,
+   "held_out_half": 2
+  },
+  "Bi": {
+   "items": 6,
+   "calibration_half": 2,
+   "held_out_half": 4
+  },
+  "Ca": {
+   "items": 1,
+   "calibration_half": 1,
+   "held_out_half": 0
+  },
+  "K": {
+   "items": 3,
+   "calibration_half": 0,
+   "held_out_half": 3
+  },
+  "Li": {
+   "items": 1,
+   "calibration_half": 0,
+   "held_out_half": 1
+  },
+  "Mo": {
+   "items": 6,
+   "calibration_half": 2,
+   "held_out_half": 4
+  },
+  "Na": {
+   "items": 2,
+   "calibration_half": 1,
+   "held_out_half": 1
+  },
+  "Pb": {
+   "items": 9,
+   "calibration_half": 3,
+   "held_out_half": 6
+  },
+  "Pd": {
+   "items": 5,
+   "calibration_half": 1,
+   "held_out_half": 4
+  },
+  "Pt": {
+   "items": 1,
+   "calibration_half": 1,
+   "held_out_half": 0
+  },
+  "Re": {
+   "items": 1,
+   "calibration_half": 0,
+   "held_out_half": 1
+  },
+  "Rh": {
+   "items": 2,
+   "calibration_half": 0,
+   "held_out_half": 2
+  },
+  "Sr": {
+   "items": 1,
+   "calibration_half": 1,
+   "held_out_half": 0
+  },
+  "W": {
+   "items": 1,
+   "calibration_half": 0,
+   "held_out_half": 1
+  }
+ },
+ "structures": 2664,
+ "structures_failed": 0
+}
