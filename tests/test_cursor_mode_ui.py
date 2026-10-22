@@ -115,6 +115,23 @@ def test_choosing_select_mode_again_checks_it_back(window):
         assert not window.select_mode_action.isChecked()
 
 
+def test_without_picking_select_falls_back_to_view(window, monkeypatch):
+    """Where VTK has no interactor to pick with (GitHub's test machines,
+    some remote desktops), choosing Select cannot be honoured: the
+    toolbar shows View, and the viewer records View as the mode, so a
+    redraw does not try to pick again."""
+    def unavailable(*args, **kwargs):
+        raise AttributeError("'NoneType' object has no attribute 'picker'")
+
+    monkeypatch.setattr(window.viewer.plotter, "enable_point_picking", unavailable)
+    window.view_mode_action.trigger()
+    window.select_mode_action.trigger()
+
+    assert window.view_mode_action.isChecked()
+    assert not window.select_mode_action.isChecked()
+    assert window.viewer.picking_enabled is False
+
+
 def test_the_two_actions_are_mutually_exclusive(window):
     """Exactly one of the two is ever checked - confirmed through the
     action group itself, which is what the visible highlight in the

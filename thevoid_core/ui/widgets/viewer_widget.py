@@ -1224,9 +1224,15 @@ class CrystalViewer(QWidget):
             return True
 
         if self._measurement_mode is not None:
-            return self.enable_measurement(self._measurement_mode)
-
-        return self.enable_selection()
+            applied = self.enable_measurement(self._measurement_mode)
+        else:
+            applied = self.enable_selection()
+        if not applied:
+            # Picking is unavailable here, so the window falls back to
+            # View mode; say so, rather than leaving Select recorded as
+            # the mode in force.
+            self.picking_enabled = False
+        return applied
 
     def enable_selection(self) -> bool:
         """Make left-clicking an atom in the 3D view select it.
