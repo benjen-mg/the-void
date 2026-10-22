@@ -16,6 +16,7 @@ and so is tested here:
 
 import gzip
 import re
+import subprocess
 import tomllib
 from pathlib import Path
 
@@ -37,6 +38,14 @@ CCDC_ITEMS = re.compile(r"_database_code_depnum_ccdc|_database_code_CSD", re.IGN
 
 
 def _published_files():
+    """What Git would publish: the tracked files in a checkout (not the
+    output folders a test run or CI's smoke test writes beside them),
+    otherwise every file outside caches and build folders."""
+    if (ROOT / ".git").exists():
+        listed = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True,
+                                check=True).stdout.decode("utf-8").split("\0")
+        yield from (ROOT / name for name in listed if name and (ROOT / name).is_file())
+        return
     for path in ROOT.rglob("*"):
         if not path.is_file() or SKIP_DIRS & set(path.relative_to(ROOT).parts):
             continue

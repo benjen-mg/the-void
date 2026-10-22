@@ -100,11 +100,19 @@ def test_choosing_view_mode_checks_it_and_unchecks_select(window):
 
 
 def test_choosing_select_mode_again_checks_it_back(window):
+    """Where VTK can pick atoms, Select is checked again. Where it cannot
+    (no working VTK interactor, as on GitHub's test machines), the
+    window falls back to View rather than showing a Select mode that
+    does nothing."""
     window.view_mode_action.trigger()
     window.select_mode_action.trigger()
 
-    assert window.select_mode_action.isChecked()
-    assert not window.view_mode_action.isChecked()
+    if window.viewer.picking_enabled:
+        assert window.select_mode_action.isChecked()
+        assert not window.view_mode_action.isChecked()
+    else:
+        assert window.view_mode_action.isChecked()
+        assert not window.select_mode_action.isChecked()
 
 
 def test_the_two_actions_are_mutually_exclusive(window):
