@@ -18,16 +18,32 @@ something you already trust before you rely on them.
 
 ## Installing
 
-Python 3.11 or newer.
+### On Windows: the installer
+
+Download `the-Void-<version>-windows-setup.exe` from the
+[latest release](https://github.com/benjen-mg/the-void/releases/latest)
+and run it. Nothing else is needed: Python and every package the Void
+uses come with it. It installs for your user account (no administrator
+rights needed), adds the Void to the Start menu, and can be removed in
+Settings > Apps like any other program. An example structure to try is
+in the Start menu too.
+
+The installer is not code-signed, so Windows may show "Windows protected
+your PC" the first time. Click "More info", then "Run anyway".
+
+### With Python: any system
+
+Python 3.11 or newer. This gives the desktop application (`the-void`),
+the command-line tools (`the-void-analyze` and the others below) and the
+`thevoid` Python API:
 
 ```bash
-pip install -r requirements.txt
-python main.py
+pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.0.0"
+the-void
 ```
 
-Or as a package, which also installs the `the-void` (desktop
-application) and `the-void-analyze` (command line) commands, and the
-`thevoid` Python API:
+Each release also has the wheel (`the_void-<version>-py3-none-any.whl`)
+to download and `pip install`. Or, from a copy of this repository:
 
 ```bash
 pip install -e .
@@ -549,7 +565,9 @@ docs/shared-index-design.md  design for a lab-shared index of analyses
 tools/             build_topology_library.py, build_coremof_index.py,
                    build_coremof_linkers.py, train_bundled_models.py,
                    index_identity_survey.py, calibrate_oms.py
-.github/workflows  CI: full test suite + CLI smoke test, Python 3.11/3.12
+.github/workflows  tests.yml: CI, full test suite + CLI smoke test, Python 3.11/3.12
+                   release.yml: the Windows installer and the wheel, per release
+packaging/         the Windows build: PyInstaller recipe, launcher, Inno Setup script
 tests/             1412 tests, with openly licensed real-structure fixtures
 ```
 

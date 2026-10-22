@@ -1,0 +1,112 @@
+# Builds what a release offers for download, and attaches it to the release:
+#
+# - the Windows installer, the-Void-<version>-windows-setup.exe;
+# - the Python package (a wheel and a source archive), for pip.
+#
+# Runs by itself when a release is published on GitHub. It can also be run
+# by hand (Actions > release > Run workflow): with a tag, it attaches the
+# files to that existing release; without one, it only builds them, as
+# downloadable artifacts of the run.
+name: release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach the files to, e.g. v1.0.0 (leave empty to only build)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+env:
+  TAG: ${{ github.event.release.tag_name || inputs.tag }}
+
+jobs:
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG || github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the Void and PyInstaller
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r packaging/requirements-windows.txt
+          pip install --no-deps .
+          pip install pyinstaller pip-licenses
+      - name: Build the application folder
+        run: pyinstaller packaging/the_void.spec --noconfirm
+      - name: Licences of the bundled packages
+        run: >
+          pip-licenses --from=mixed --with-license-file --no-license-path
+          --format=plain-vertical --output-file "dist/the Void/THIRD-PARTY-LICENSES.txt"
+      # A frozen build can lack a module or a data file that a normal
+      # install has. The self-test loads the example structure, runs the
+      # analyses and opens the main window off-screen.
+      - name: Self-test of the built application
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:RUNNER_TEMP "selftest.json"
+          $p = Start-Process -FilePath "dist\the Void\the Void.exe" -ArgumentList "--self-test", "`"$out`"" -Wait -PassThru
+          Get-Content $out
+          if ($p.ExitCode -ne 0) { throw "self-test failed (exit code $($p.ExitCode))" }
+      - name: Build the installer
+        shell: pwsh
+        run: |
+          $version = python -c "from thevoid_core.version import __version__; print(__version__)"
+          choco install innosetup -y --no-progress
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "/DAppVersion=$version" packaging\the_void.iss
+          if ($LASTEXITCODE -ne 0) { throw "Inno Setup failed" }
+          Get-ChildItem dist\*.exe
+      - name: Install it silently and run the self-test again
+        shell: pwsh
+        run: |
+          $setup = (Get-ChildItem dist\the-Void-*-windows-setup.exe).FullName
+          $target = Join-Path $env:RUNNER_TEMP "installed"
+          $p = Start-Process -FilePath $setup -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/CURRENTUSER", "/NORESTART", "/MERGETASKS=!desktopicon", "/DIR=`"$target`"" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "installer failed (exit code $($p.ExitCode))" }
+          $out = Join-Path $env:RUNNER_TEMP "installed.json"
+          $p = Start-Process -FilePath (Join-Path $target "the Void.exe") -ArgumentList "--self-test", "`"$out`"" -Wait -PassThru
+          Get-Content $out
+          if ($p.ExitCode -ne 0) { throw "installed self-test failed (exit code $($p.ExitCode))" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/the-Void-*-windows-setup.exe
+      - name: Attach to the release
+        if: env.TAG != ''
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$env:TAG" (Get-ChildItem dist\the-Void-*-windows-setup.exe).FullName --clobber
+
+  python-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG || github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build the wheel and the source archive
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+          ls -l dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-package
+          path: dist/*
+      - name: Attach to the release
+        if: env.TAG != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$TAG" dist/* --clobber

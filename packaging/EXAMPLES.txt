@@ -1,0 +1,11 @@
+Example structure
+
+2020[Zn][dia]3[ASR]1.cif is a Zn metal-organic framework (the dia net,
+124 atoms) from CoRE MOF 2024's supporting-information set, published
+in doi:10.1039/C9CC06849J. Open it with File > Open to try the Void.
+
+CoRE MOF 2024: G. Zhao, L. Brabson, S. Chheda, J. Huang, H. Kim, K. Liu
+et al., "CoRE MOF DB: a curated experimental metal-organic framework
+database with machine-learned properties for integrated
+material-process screening", Matter 8, 102140 (2025). Licence CC-BY-4.0,
+https://creativecommons.org/licenses/by/4.0/

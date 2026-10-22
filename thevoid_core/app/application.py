@@ -57,6 +57,16 @@ class TheVoidApplication:
         install_exception_hook()
         logging.getLogger("thevoid_core").info("the Void %s starting", __version__)
 
+        if sys.platform == "win32":
+            # Without its own AppUserModelID, Windows groups the window
+            # under python.exe and shows the Python icon in the taskbar.
+            try:
+                import ctypes
+
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("TheVoid.Desktop")
+            except Exception:
+                pass
+
         app = QApplication(sys.argv)
 
         # Needed for QSettings to find a consistent location.

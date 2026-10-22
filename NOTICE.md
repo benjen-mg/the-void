@@ -50,8 +50,14 @@ Microporous Mesoporous Mater. 149, 134 (2012).
 - `tests/fixtures/zeopp_default_radii.json`: Zeo++'s default radius table,
   read back from Zeo++ to check the Void's copy of it.
 
-## Not included
+## Python packages
 
-Python packages the Void depends on (PySide6, PyVista, VTK, pymatgen,
-RDKit, NumPy, SciPy and others) are not included: pip installs them, each
-under its own licence.
+The repository does not include the Python packages the Void depends on
+(PySide6, PyVista, VTK, pymatgen, RDKit, NumPy, SciPy, scikit-learn and
+others): pip installs them, each under its own licence.
+
+The Windows installer does include them, with Python itself, unchanged.
+Their licences are in THIRD-PARTY-LICENSES.txt next to the program. Qt
+and PySide6 are used under the GNU LGPL v3: they are separate libraries
+in the installed folder and can be replaced with other builds of the
+same version.
