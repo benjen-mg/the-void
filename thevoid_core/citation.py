@@ -9,7 +9,7 @@ from __future__ import annotations
 from thevoid_core.version import __version__
 
 TITLE = "the Void"
-AUTHORS = (("Benyamin M.", "Garmejani", "Victoria University of Wellington"),)
+AUTHORS = (("Benyamin", "M. Garmejani", "Victoria University of Wellington"),)
 YEAR = 2026
 
 LICENCE_SPDX = "CC-BY-NC-ND-4.0"
