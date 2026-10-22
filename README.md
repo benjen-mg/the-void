@@ -582,7 +582,7 @@ cite it:
 
 ```bibtex
 @software{the_void,
-  author  = {Garmejani, Benyamin M.},
+  author  = {M. Garmejani, Benyamin},
   title   = {the Void},
   version = {1.0.0},
   year    = {2026},
