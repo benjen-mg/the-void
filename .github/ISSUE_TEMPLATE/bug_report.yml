@@ -1,0 +1,50 @@
+name: Bug report
+description: Something went wrong, crashed, or gave a result that looks wrong.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting this. Please do not attach structures from the
+        Cambridge Structural Database (CSD): give the CSD refcode or the CCDC
+        number instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. File > Open, the structure below
+        2. Analysis > Pore Analysis, probe 1.2 Å
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: structure
+    attributes:
+      label: Structure
+      description: Attach the CIF if you may share it, or say where it comes from (CoRE MOF id, CSD refcode, paper).
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Paste what Help > Copy Diagnostics puts on the clipboard (version, system, and the end of the log).
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install the Void?
+      options:
+        - Windows installer
+        - pip / Python
+        - From a copy of the repository
+    validations:
+      required: true

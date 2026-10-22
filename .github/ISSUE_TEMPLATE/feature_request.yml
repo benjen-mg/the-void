@@ -1,0 +1,21 @@
+name: Feature request
+description: An analysis, an export or a workflow the Void does not offer yet.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What do you need to do?
+      description: Describe the analysis or the workflow, and why, rather than only the solution you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: How do you do it now?
+      description: Another program, a script, by hand, or not at all.
+  - type: textarea
+    id: references
+    attributes:
+      label: Methods or references
+      description: Papers, programs or databases that define how it should be computed.
