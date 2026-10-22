@@ -24,3 +24,9 @@ keywords:
   - pore analysis
   - topology
 repository-code: "https://github.com/benjen-mg/the-void"
+# Zenodo's DOI for all versions (resolves to the latest).
+doi: "10.5281/zenodo.23578711"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23578711"
+    description: "All versions of the Void (Zenodo)"

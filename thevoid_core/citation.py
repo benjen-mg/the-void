@@ -24,6 +24,9 @@ LICENCE_SUMMARY = (
 
 REPOSITORY_URL = "https://github.com/benjen-mg/the-void"
 
+#: Zenodo's DOI for all versions of the Void; it resolves to the latest.
+DOI = "10.5281/zenodo.23578711"
+
 
 def author_list() -> str:
     """'B. M. Garmejani', or 'A. One and B. Two', or 'A. One, B. Two and C. Three'."""
@@ -37,7 +40,9 @@ def author_list() -> str:
 def citation_text(version: str = __version__) -> str:
     """The reference to put in a paper's reference list."""
     text = f"{author_list()}, {TITLE}, version {version} ({YEAR}). Software"
-    if REPOSITORY_URL:
+    if DOI:
+        text += f", doi:{DOI}"
+    elif REPOSITORY_URL:
         text += f", {REPOSITORY_URL}"
     return text + "."
 
@@ -51,6 +56,8 @@ def bibtex(version: str = __version__) -> str:
         f"  version = {{{version}}},",
         f"  year    = {{{YEAR}}},",
     ]
+    if DOI:
+        lines.append(f"  doi     = {{{DOI}}},")
     if REPOSITORY_URL:
         lines.append(f"  url     = {{{REPOSITORY_URL}}},")
     lines.append(f"  note    = {{Licensed {LICENCE_SPDX}}}")

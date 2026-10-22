@@ -116,6 +116,7 @@ def test_licence_version_and_authors_agree_everywhere():
     assert project["version"] == fields["version"] == __version__
     assert project["license"] == citation.LICENCE_SPDX == fields["license"]
     assert project["license-files"] == ["LICENSE", "NOTICE.md"]
+    assert fields["doi"] == citation.DOI
     assert [(a["given-names"], a["family-names"], a["affiliation"]) for a in authors] \
         == list(citation.AUTHORS)
     assert [a["name"] for a in project["authors"]] == [f"{g} {f}" for g, f, _ in citation.AUTHORS]

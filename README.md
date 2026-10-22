@@ -1,5 +1,7 @@
 # the Void
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23578711.svg)](https://doi.org/10.5281/zenodo.23578711)
+
 Crystallography and porous-materials desktop software, free for research
 and other non-commercial use.
 Load a crystal structure, look at it in 3D, measure it, and run the
@@ -576,7 +578,7 @@ tests/             1412 tests, with openly licensed real-structure fixtures
 If the Void, or numbers it produced, appear in a publication, please
 cite it:
 
-> B. M. Garmejani, the Void, version 1.0.0 (2026). Software, https://github.com/benjen-mg/the-void.
+> B. M. Garmejani, the Void, version 1.0.0 (2026). Software, doi:10.5281/zenodo.23578711.
 
 ```bibtex
 @software{the_void,
@@ -584,14 +586,17 @@ cite it:
   title   = {the Void},
   version = {1.0.0},
   year    = {2026},
+  doi     = {10.5281/zenodo.23578711},
   url     = {https://github.com/benjen-mg/the-void},
   note    = {Licensed CC-BY-NC-ND-4.0}
 }
 ```
 
-Cite the version you used. GitHub's "Cite this repository" button reads
-the same details from `CITATION.cff`, and Help > About the Void shows
-them too. Please also cite the methods behind the numbers you report;
+The DOI above stands for every version and leads to the latest. To
+cite the exact version you used, take that version's own DOI from the
+[Zenodo record](https://doi.org/10.5281/zenodo.23578711). GitHub's
+"Cite this repository" button reads the same details from
+`CITATION.cff`, and Help > About the Void shows them too. Please also cite the methods behind the numbers you report;
 Help > About the Void lists them.
 
 ## Licence
