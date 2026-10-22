@@ -6,8 +6,8 @@ message: >-
 title: "the Void"
 type: software
 authors:
-  - given-names: Benyamin M.
-    family-names: Garmejani
+  - given-names: Benyamin
+    family-names: M. Garmejani
     affiliation: "Victoria University of Wellington"
 version: "1.0.0"
 date-released: "2026-10-22"
