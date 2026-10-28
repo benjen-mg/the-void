@@ -431,10 +431,10 @@ class Framework:
 
     def write_cif(self, path) -> Path:
         """The structure as a CIF (as written, disorder included)."""
-        from pymatgen.io.cif import CifWriter
+        from thevoid_core.services.export import cif_writer
 
         path = Path(path)
-        CifWriter(self._structure).write_file(str(path))
+        cif_writer(self._structure).write_file(str(path))
         return path
 
     def raspa_input(self, folder, **settings) -> Path:

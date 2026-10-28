@@ -81,14 +81,61 @@ def export_poscar(structure) -> str:
     return Poscar(structure).get_str()
 
 
+def unique_cif_labels(type_symbols) -> list[str]:
+    """An _atom_site_label for every row of a CIF atom-site loop, unique
+    as the CIF standard requires: the element and a count that restarts
+    per element (Zn1 Zn2 ... C1 C2 ...), in row order.
+
+    For an ordered structure these are the labels the structure tree
+    shows (services/site_labels.py). They are short, too: up to 999 of
+    a one-letter element and 99 of a two-letter one fit SHELX's four
+    characters, so Olex2 and SHELX read them as they are.
+    """
+    import re
+    from collections import defaultdict
+
+    counters: dict[str, int] = defaultdict(int)
+    labels = []
+    for symbol in type_symbols:
+        match = re.match(r"[A-Z][a-z]?", str(symbol))
+        element = match.group(0) if match else "X"
+        counters[element] += 1
+        labels.append(f"{element}{counters[element]}")
+    return labels
+
+
+def cif_writer(structure):
+    """pymatgen's CifWriter, with every atom-site label unique.
+
+    Version 1.0.1. pymatgen keeps a site's label from the file it was
+    read from, so the symmetry copies of an atom that a CIF lists once
+    (Zn1 in P2_1/c) were all written as Zn1, and every species of a
+    disordered site got the same label. Olex2, SHELX and other CIF
+    readers reject or rename duplicate labels. Every CIF the Void
+    writes goes through here: File > Export Structure > CIF,
+    Framework.write_cif, batch CIFs and functionalised variants.
+    """
+    import warnings
+
+    from pymatgen.io.cif import CifWriter
+
+    with warnings.catch_warnings():
+        # pymatgen warns about the duplicates that are replaced below.
+        warnings.filterwarnings("ignore", message="Site labels are not unique")
+        writer = CifWriter(structure)
+    for block in writer.cif_file.data.values():
+        symbols = block.data.get("_atom_site_type_symbol")
+        if symbols:
+            block.data["_atom_site_label"] = unique_cif_labels(symbols)
+    return writer
+
+
 def export_cif(structure) -> str:
     """CIF format, via pymatgen's own writer - cell parameters
     (a, b, c, alpha, beta, gamma) and fractional coordinates, both
-    exact.
+    exact - with unique atom labels (cif_writer).
     """
-    from pymatgen.io.cif import CifWriter
-
-    return str(CifWriter(structure))
+    return str(cif_writer(structure))
 
 
 def export_xyz(structure) -> str:

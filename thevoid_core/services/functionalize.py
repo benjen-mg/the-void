@@ -1340,14 +1340,14 @@ def write_variants(parent: Parent, variants, groups, out_dir, *, per_linker=(1,)
     """Write built variants as CIFs (clashes only with keep_clashes),
     the parent, functionalization.json and variants.csv; returns the
     provenance record."""
-    from pymatgen.io.cif import CifWriter
+    from thevoid_core.services.export import cif_writer
 
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     for variant in variants:
         if variant.status != "clash" or keep_clashes:
             path = out / f"{variant.name}.cif"
-            CifWriter(variant.structure).write_file(str(path))
+            cif_writer(variant.structure).write_file(str(path))
             variant.file = path.name
         else:
             variant.file = ""

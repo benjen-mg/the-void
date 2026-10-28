@@ -9,7 +9,7 @@ geometric analyses that matter for MOFs and other framework materials:
 pore size, accessible surface area, guest accessibility, open metal
 sites, coordination environments, and simulated powder XRD.
 
-**Version 1.0.0**, the first public release. The analyses below have been checked against
+**Version 1.0.1**. The analyses below have been checked against
 analytic cases and against real deposited structures (openly licensed
 CoRE MOF 2024 structures, bundled as test fixtures; CALF-20, CCDC
 2084733; and MUF-16(Mn), CCDC 1948905, driven through every analysis
@@ -40,7 +40,7 @@ the command-line tools (`the-void-analyze` and the others below) and the
 `thevoid` Python API:
 
 ```bash
-pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.0.0"
+pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.0.1"
 the-void
 ```
 
@@ -64,7 +64,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-1412 tests, no GPU needed. On a headless machine set
+1418 tests, no GPU needed. On a headless machine set
 `QT_QPA_PLATFORM=offscreen` first; Qt will otherwise fail to find a
 display. Some tests need outside files and are skipped without them:
 
@@ -570,7 +570,7 @@ tools/             build_topology_library.py, build_coremof_index.py,
 .github/workflows  tests.yml: CI, full test suite + CLI smoke test, Python 3.11/3.12
                    release.yml: the Windows installer and the wheel, per release
 packaging/         the Windows build: PyInstaller recipe, launcher, Inno Setup script
-tests/             1412 tests, with openly licensed real-structure fixtures
+tests/             1418 tests, with openly licensed real-structure fixtures
 ```
 
 ## How to cite
@@ -578,13 +578,13 @@ tests/             1412 tests, with openly licensed real-structure fixtures
 If the Void, or numbers it produced, appear in a publication, please
 cite it:
 
-> B. M. Garmejani, the Void, version 1.0.0 (2026). Software, doi:10.5281/zenodo.23578711.
+> B. M. Garmejani, the Void, version 1.0.1 (2026). Software, doi:10.5281/zenodo.23578711.
 
 ```bibtex
 @software{the_void,
   author  = {M. Garmejani, Benyamin},
   title   = {the Void},
-  version = {1.0.0},
+  version = {1.0.1},
   year    = {2026},
   doi     = {10.5281/zenodo.23578711},
   url     = {https://github.com/benjen-mg/the-void},

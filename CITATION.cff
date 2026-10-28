@@ -9,8 +9,8 @@ authors:
   - given-names: Benyamin
     family-names: M. Garmejani
     affiliation: "Victoria University of Wellington"
-version: "1.0.0"
-date-released: "2026-10-22"
+version: "1.0.1"
+date-released: "2026-10-28"
 license: CC-BY-NC-ND-4.0
 abstract: >-
   Desktop software for crystal structures and porous materials: 3D

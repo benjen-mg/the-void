@@ -182,14 +182,14 @@ def analyze_batch(inputs, *, jobs: int = 1, out=None, reference_csv=None, figure
         item[0] = name
 
     if out is not None:
-        from pymatgen.io.cif import CifWriter
+        from thevoid_core.services.export import cif_writer
 
         Path(out).mkdir(parents=True, exist_ok=True)
         for item in items:
             name, structure, source = item[0], item[1], item[2]
             if structure is not None and source is None:
                 path = Path(out) / f"{name}.cif"
-                CifWriter(structure).write_file(str(path))
+                cif_writer(structure).write_file(str(path))
                 item[2] = str(path)
 
     reports = [None] * len(items)
