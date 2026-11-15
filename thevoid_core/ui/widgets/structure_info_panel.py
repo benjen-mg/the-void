@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFormLayout,
     QFrame,
@@ -30,6 +31,13 @@ class StructureInfoPanel(QWidget):
         #: set_index_matches.
         self.index_label = QLabel("-")
         self.index_label.setWordWrap(True)
+
+        #: Version 1.1.0: what the file says about its refinement (R1,
+        #: wR2 ...), one line per item - see set_refinement.
+        self.refinement_label = QLabel("")
+        self.refinement_label.setWordWrap(True)
+        self.refinement_label.setTextInteractionFlags(
+            Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.bondcount_label = QLabel("-")
         self.bond_min_label = QLabel("-")
@@ -89,6 +97,18 @@ class StructureInfoPanel(QWidget):
                 ],
             )
         )
+
+        #: Shown only for a file that reports a refinement: a CIF from a
+        #: refinement program, or a SHELX .res.
+        self.refinement_group = QGroupBox("Refinement")
+        self.refinement_group.setToolTip(
+            "What the file itself reports about the refinement against the "
+            "diffraction data. The Void shows these numbers; it does not "
+            "compute or check them.")
+        refinement_layout = QVBoxLayout(self.refinement_group)
+        refinement_layout.addWidget(self.refinement_label)
+        self.refinement_group.setVisible(False)
+        layout.addWidget(self.refinement_group)
 
         layout.addWidget(
             self._group(
@@ -153,6 +173,7 @@ class StructureInfoPanel(QWidget):
         self.sitecount_label.setText(str(info.site_count))
 
         self._set_disorder(info, diagnostics)
+        self.set_refinement(getattr(info, "refinement", None))
 
         self.bondcount_label.setText(str(stats["count"]))
         self.bond_min_label.setText(f"{stats['min']:.3f}")
@@ -288,6 +309,16 @@ class StructureInfoPanel(QWidget):
         self.index_label.setText("lookup failed")
         self.index_label.setStyleSheet("color: gray;")
         self.index_label.setToolTip(message)
+
+    def set_refinement(self, refinement) -> None:
+        """Show a file's refinement details (services/refinement.py), or
+        hide the group when the file has none."""
+        from thevoid_core.services.refinement import refinement_rows
+
+        rows = refinement_rows(refinement or {})
+        self.refinement_label.setText(
+            "<br>".join(f"<b>{label}:</b> {text}" for label, text in rows))
+        self.refinement_group.setVisible(bool(rows))
 
     def _set_disorder(self, info, diagnostics) -> None:
         partial = getattr(info, "partial_occupancy_sites", 0)

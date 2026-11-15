@@ -86,6 +86,19 @@ class Framework:
         return self._space_group
 
     @property
+    def refinement(self) -> dict:
+        """What the file reports about its own refinement: r1, wr2,
+        goof, reflections, parameters, peak and hole, temperature_K ...
+        (a CIF from a refinement program, or a SHELX .res). Empty for a
+        file that reports none, and for a structure not read from a
+        file. The Void reports these numbers; it does not check them."""
+        from thevoid_core.services.refinement import refinement_for_file
+
+        if "refinement" not in self._cache:
+            self._cache["refinement"] = refinement_for_file(self.source)
+        return dict(self._cache["refinement"])
+
+    @property
     def density_g_cm3(self) -> float:
         from thevoid_core.services.report import crystal_density
 

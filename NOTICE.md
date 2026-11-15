@@ -50,6 +50,16 @@ Microporous Mesoporous Mater. 149, 134 (2012).
 - `tests/fixtures/zeopp_default_radii.json`: Zeo++'s default radius table,
   read back from Zeo++ to check the Void's copy of it.
 
+## ShelXFile
+
+Daniel Kratzert, ShelXFile, https://github.com/dkratzert/ShelXFile, MIT
+licence, Copyright (c) 2018 Daniel Kratzert.
+
+- `tests/fixtures/shelx/`: two SHELXL `.res` files and one SHELXL CIF from
+  ShelXFile's test resources, used to check the Void's SHELX reader. The
+  licence text and what was changed are in the folder's README.txt. The
+  reader itself (`thevoid_core/services/shelx`) is the Void's own code.
+
 ## Python packages
 
 The repository does not include the Python packages the Void depends on

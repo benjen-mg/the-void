@@ -305,8 +305,9 @@ class MainWindow(QMainWindow):
         self.open_action = file_menu.addAction("Open Structure...")
         self.open_action.setShortcut("Ctrl+O")
         self.open_action.setToolTip(
-            "Open a CIF, VASP POSCAR/CONTCAR, or pymatgen JSON structure "
-            "file. You can also just drag a file onto the window."
+            "Open a CIF, SHELX .res/.ins, VASP POSCAR/CONTCAR, or pymatgen "
+            "JSON structure file. You can also just drag a file onto the "
+            "window."
         )
         self.open_action.triggered.connect(self.open_structure)
 
@@ -998,8 +999,8 @@ class MainWindow(QMainWindow):
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         subtitle = QLabel(
-            "Open a CIF, VASP POSCAR/CONTCAR, or pymatgen JSON file to "
-            "look at it in 3D and run analyses on it.\n\n"
+            "Open a CIF, SHELX .res/.ins, VASP POSCAR/CONTCAR, or pymatgen "
+            "JSON file to look at it in 3D and run analyses on it.\n\n"
             "File > Open Structure..., Ctrl+O, or just drag a file onto "
             "this window."
         )
@@ -1303,8 +1304,10 @@ class MainWindow(QMainWindow):
             self,
             "Open Structure File",
             "",
-            "Structure Files (*.cif *.CIF *.json *.vasp POSCAR CONTCAR);;"
-            "CIF Files (*.cif *.CIF);;All Files (*)",
+            "Structure Files (*.cif *.CIF *.res *.RES *.ins *.INS *.json *.vasp "
+            "POSCAR CONTCAR);;"
+            "CIF Files (*.cif *.CIF);;SHELX Files (*.res *.RES *.ins *.INS);;"
+            "All Files (*)",
         )
 
         if not filename:
@@ -1415,7 +1418,7 @@ class MainWindow(QMainWindow):
     #: Kept in sync with the Open Structure File dialog's own filter -
     #: a dropped file is only accepted if it looks like something this
     #: application can actually load.
-    _DROPPABLE_SUFFIXES = {".cif", ".json", ".vasp"}
+    _DROPPABLE_SUFFIXES = {".cif", ".res", ".ins", ".json", ".vasp"}
     _DROPPABLE_NAMES = {"poscar", "contcar"}
 
     def _is_droppable(self, filename: str) -> bool:
@@ -2268,7 +2271,7 @@ class MainWindow(QMainWindow):
 
         if info is not None and info.has_explicit_disorder_groups:
             confirmation = (
-                "The CIF file confirms this directly: it labels "
+                "The file confirms this directly: it labels "
                 f"{len(info.disorder_groups)} site(s) with explicit "
                 "disorder group numbers.\n\n"
             )

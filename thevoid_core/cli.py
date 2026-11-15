@@ -47,7 +47,7 @@ def build_parser() -> argparse.ArgumentParser:
         "PSD and XRD analysis of crystal structures (the Void "
         f"{__version__}).",
     )
-    parser.add_argument("files", nargs="+", help="CIF / POSCAR / JSON structure files")
+    parser.add_argument("files", nargs="+", help="CIF / SHELX .res or .ins / POSCAR / JSON structure files")
     parser.add_argument("-o", "--out", default="the_void_results",
                         help="output directory (default: %(default)s)")
     parser.add_argument("--summary", default="summary.csv",

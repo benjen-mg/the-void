@@ -33,6 +33,17 @@ print(fw.topology().summary)      # dia 4-c
 print(fw.partition().linker_formulas())   # {'C6H5N2O2': 8}
 ```
 
+`thevoid.load` also reads SHELX `.res` and `.ins` files, as Olex2 and
+SHELXL keep them. `fw.refinement` is what the file reports about its own
+refinement, and is empty for a file that reports none:
+
+```python
+ni = thevoid.load("tests/fixtures/shelx/I-43d.res")
+print(ni.space_group, ni.n_sites)             # I-43d 2860
+print(ni.refinement["r1"], ni.refinement["parameters"])   # 0.0321 247
+assert fw.refinement == {}
+```
+
 `load` takes a file path (CIF, or any format pymatgen reads), a
 pymatgen `Structure`, or an ASE `Atoms`. A disordered CIF keeps its
 disorder: every analysis drops the sites below 0.5 occupancy, as the

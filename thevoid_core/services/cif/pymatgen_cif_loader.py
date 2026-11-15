@@ -44,6 +44,11 @@ class CIFInfo:
     #: be read from the raw file rather than from the parsed Structure.
     disorder_groups: dict[str, str] = field(default_factory=dict)
 
+    #: What the file says about its refinement (R1, wR2, data and
+    #: parameters ...): services/refinement.py. Empty when it says
+    #: nothing, as a database CIF or a POSCAR does.
+    refinement: dict = field(default_factory=dict)
+
     @property
     def atom_count(self) -> int:
         """Retained for callers written against the old attribute name."""
@@ -60,7 +65,27 @@ class CIFInfo:
 
 class PymatgenCIFLoader:
     def load(self, file_path: str) -> CIFInfo:
-        structure = Structure.from_file(file_path)
+        from thevoid_core.services.refinement import (
+            refinement_for_file,
+            refinement_from_shelx,
+        )
+        from thevoid_core.services.shelx import SHELX_SUFFIXES
+
+        if Path(file_path).suffix.lower() in SHELX_SUFFIXES:
+            # Version 1.1.0: a SHELX .res/.ins is turned into CIF text
+            # and read as a CIF is, so symmetry, occupancies and
+            # disorder parts are handled by the one code path.
+            from thevoid_core.services.shelx import read_shelx, shelx_to_cif
+
+            model = read_shelx(file_path)
+            cif_text = shelx_to_cif(model, Path(file_path).stem)
+            structure = Structure.from_str(cif_text, fmt="cif")
+            disorder_groups = self._disorder_groups_from_parser(cif_text, from_text=True)
+            refinement = refinement_from_shelx(model)
+        else:
+            structure = Structure.from_file(file_path)
+            disorder_groups = self._read_disorder_groups(file_path)
+            refinement = refinement_for_file(file_path)
 
         lattice = structure.lattice
 
@@ -87,7 +112,8 @@ class PymatgenCIFLoader:
             gamma=lattice.gamma,
             file_path=str(Path(file_path)),
             structure=structure,
-            disorder_groups=self._read_disorder_groups(file_path),
+            disorder_groups=disorder_groups,
+            refinement=refinement,
         )
 
     @staticmethod
@@ -111,10 +137,16 @@ class PymatgenCIFLoader:
         if Path(file_path).suffix.lower() not in (".cif",):
             return {}
 
+        return PymatgenCIFLoader._disorder_groups_from_parser(file_path)
+
+    @staticmethod
+    def _disorder_groups_from_parser(source: str, from_text: bool = False) -> dict[str, str]:
+        """The label -> disorder group mapping of a CIF file, or of CIF
+        text (from_text=True, as made from a SHELX file)."""
         try:
             from pymatgen.io.cif import CifParser
 
-            parser = CifParser(file_path)
+            parser = CifParser.from_str(source) if from_text else CifParser(source)
 
             groups: dict[str, str] = {}
 
@@ -135,7 +167,7 @@ class PymatgenCIFLoader:
         except Exception:
             logger.debug(
                 "Could not read disorder groups from %r.",
-                file_path,
+                source[:200],
                 exc_info=True,
             )
             return {}

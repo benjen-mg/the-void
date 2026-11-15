@@ -112,8 +112,8 @@ def test_the_public_api_is_what_it_says():
         assert _parameters(getattr(thevoid, name)) == parameters, name
     for name, parameters in FRAMEWORK_METHODS.items():
         assert _parameters(getattr(thevoid.Framework, name)) == parameters, name
-    for name in ("structure", "formula", "n_sites", "space_group", "density_g_cm3",
-                 "cell_volume_A3", "bonds"):
+    for name in ("structure", "formula", "n_sites", "space_group", "refinement",
+                 "density_g_cm3", "cell_volume_A3", "bonds"):
         assert isinstance(inspect.getattr_static(thevoid.Framework, name), property), name
     from thevoid_core.version import __version__
 

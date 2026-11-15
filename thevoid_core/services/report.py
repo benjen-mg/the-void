@@ -373,7 +373,9 @@ METHOD_NOTES = {
 
 
 def new_report(structure, *, source: str | None = None, space_group=None) -> dict:
-    return {
+    from thevoid_core.services.refinement import refinement_for_file
+
+    report = {
         "provenance": provenance(),
         "input": {
             "file": str(source) if source else None,
@@ -384,6 +386,13 @@ def new_report(structure, *, source: str | None = None, space_group=None) -> dic
         "results": {},
         "errors": {},
     }
+    # Version 1.1.0: what the input file reports about its own
+    # refinement, when it reports any (a CIF from a refinement program,
+    # a SHELX .res), so the report says what it was run on.
+    refinement = refinement_for_file(source)
+    if refinement:
+        report["refinement"] = _clean(refinement)
+    return report
 
 
 # ----------------------------------------------------------------------
@@ -631,6 +640,14 @@ def to_markdown(report: dict) -> str:
         f"| Density | {s['density_g_cm3']:.4f} g/cm³ |",
         f"| Sites (partial occupancy) | {s['sites_in_cell']} ({s['partial_occupancy_sites']}) |",
     ]
+
+    if report.get("refinement"):
+        from thevoid_core.services.refinement import refinement_rows
+
+        lines += ["", "## Refinement (as reported by the input file)", "",
+                  "| Item | Value |", "|---|---|"]
+        lines += [f"| {label} | {text} |" for label, text in
+                  refinement_rows(report["refinement"])]
 
     if "topology" in r:
         q = r["topology"]

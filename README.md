@@ -9,7 +9,7 @@ geometric analyses that matter for MOFs and other framework materials:
 pore size, accessible surface area, guest accessibility, open metal
 sites, coordination environments, and simulated powder XRD.
 
-**Version 1.0.1**. The analyses below have been checked against
+**Version 1.1.0**. The analyses below have been checked against
 analytic cases and against real deposited structures (openly licensed
 CoRE MOF 2024 structures, bundled as test fixtures; CALF-20, CCDC
 2084733; and MUF-16(Mn), CCDC 1948905, driven through every analysis
@@ -40,7 +40,7 @@ the command-line tools (`the-void-analyze` and the others below) and the
 `thevoid` Python API:
 
 ```bash
-pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.0.1"
+pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.1.0"
 the-void
 ```
 
@@ -64,7 +64,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-1418 tests, no GPU needed. On a headless machine set
+1436 tests, no GPU needed. On a headless machine set
 `QT_QPA_PLATFORM=offscreen` first; Qt will otherwise fail to find a
 display. Some tests need outside files and are skipped without them:
 
@@ -77,8 +77,16 @@ CI provides both.
 ## What it does
 
 **Opening structures** — CIF (including disordered files, with the
-`_atom_site_disorder_group` column read where present), VASP
-POSCAR/CONTCAR, and pymatgen JSON. Bonds are detected from covalent
+`_atom_site_disorder_group` column read where present), SHELX `.res`
+and `.ins` files as Olex2 and SHELXL keep them, VASP POSCAR/CONTCAR,
+and pymatgen JSON. A SHELX file is read with its free variables,
+special positions, `PART` disorder and residues, so a structure can be
+analysed while it is still being refined, without writing a CIF first.
+Where the file reports its refinement (R1, wR2, goodness of fit, data /
+restraints / parameters, the largest difference peak and hole, the
+temperature, a solvent mask or twinning), the Structure tab shows it,
+reports carry it, and it is `fw.refinement` from Python. The Void reads
+these numbers; it does not refine structures. Bonds are detected from covalent
 radii with an adjustable tolerance, and contacts too short to be real
 bonds are reported rather than silently drawn.
 
@@ -570,7 +578,7 @@ tools/             build_topology_library.py, build_coremof_index.py,
 .github/workflows  tests.yml: CI, full test suite + CLI smoke test, Python 3.11/3.12
                    release.yml: the Windows installer and the wheel, per release
 packaging/         the Windows build: PyInstaller recipe, launcher, Inno Setup script
-tests/             1418 tests, with openly licensed real-structure fixtures
+tests/             1436 tests, with openly licensed real-structure fixtures
 ```
 
 ## How to cite
@@ -578,13 +586,13 @@ tests/             1418 tests, with openly licensed real-structure fixtures
 If the Void, or numbers it produced, appear in a publication, please
 cite it:
 
-> B. M. Garmejani, the Void, version 1.0.1 (2026). Software, doi:10.5281/zenodo.23578711.
+> B. M. Garmejani, the Void, version 1.1.0 (2026). Software, doi:10.5281/zenodo.23578711.
 
 ```bibtex
 @software{the_void,
   author  = {M. Garmejani, Benyamin},
   title   = {the Void},
-  version = {1.0.1},
+  version = {1.1.0},
   year    = {2026},
   doi     = {10.5281/zenodo.23578711},
   url     = {https://github.com/benjen-mg/the-void},
