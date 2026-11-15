@@ -126,9 +126,12 @@ def test_the_element_key_is_first_on_the_structure_tab(make_window, qt_app):
         r, g, b = window.viewer.color_provider.get_color(symbol)
         assert color == "#{:02x}{:02x}{:02x}".format(int(r * 255), int(g * 255), int(b * 255))
     assert set(shown) == {"C", "H", "N", "O", "Zn"}
-    # Above everything else on the tab.
+    # Above everything else shown on the tab. (A hidden group, such as
+    # Refinement for a file that reports none, has no position.)
     group = window.info_panel.elements_group
-    others = [g for g in window.info_panel.findChildren(type(group)) if g is not group]
+    others = [g for g in window.info_panel.findChildren(type(group))
+              if g is not group and not g.isHidden()]
+    assert len(others) >= 3
     assert all(group.mapTo(window.info_panel, group.rect().topLeft()).y()
                < g.mapTo(window.info_panel, g.rect().topLeft()).y() for g in others)
     # No Legend tab left to look for.

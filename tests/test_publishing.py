@@ -156,3 +156,12 @@ def test_notice_accounts_for_the_bundled_data():
     assert "thevoid_core/data/models/" in notice
     assert all((m / "card.json").is_file() and '"licence"' in (m / "card.json").read_text()
                for m in (data / "models").iterdir() if m.is_dir())
+
+
+def test_the_changelog_starts_with_this_version():
+    """CHANGELOG.md is what users read to see what a release changed; a
+    release whose version has no entry there is caught here."""
+    text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    first = next(line for line in text.splitlines() if line.startswith("## "))
+    assert first.startswith(f"## {__version__} ("), first
+    assert "CHANGELOG.md" in (ROOT / "README.md").read_text(encoding="utf-8")

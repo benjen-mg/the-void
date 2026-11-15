@@ -16,7 +16,8 @@ CoRE MOF 2024 structures, bundled as test fixtures; CALF-20, CCDC
 and UI action during testing), but this has not yet been used in
 anger by anybody. Treat
 numbers it reports as you would any new tool's: worth checking against
-something you already trust before you rely on them.
+something you already trust before you rely on them. What changed in
+each version is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Installing
 
@@ -64,7 +65,7 @@ pip install -r requirements-dev.txt
 pytest
 ```
 
-1436 tests, no GPU needed. On a headless machine set
+1437 tests, no GPU needed. On a headless machine set
 `QT_QPA_PLATFORM=offscreen` first; Qt will otherwise fail to find a
 display. Some tests need outside files and are skipped without them:
 
@@ -244,6 +245,7 @@ row per structure:
 ```bash
 the-void-analyze MOFs/*.cif --out results --psd --guests CO2,N2,benzene=5.85 -j 4
 the-void-analyze CALF-20.cif --surface-probe CO2 --xrd
+the-void-analyze refinement/mof.res            # a SHELX .res or .ins, as from Olex2
 the-void-analyze MOFs/*.cif --raspa --raspa-adsorbate CO2 --raspa-pressures 0.1,1,10
 the-void-analyze MOFs/*.cif --compare-coremof
 the-void-analyze --help
@@ -394,7 +396,8 @@ defaults:
 ```python
 import thevoid
 
-fw = thevoid.load("CALF-20.cif")        # or a pymatgen Structure, or ASE Atoms
+fw = thevoid.load("CALF-20.cif")        # or a SHELX .res/.ins, a pymatgen Structure, ASE Atoms
+fw.refinement                           # R1, wR2, GooF ... as the file reports them, or {}
 fw.pores().pld_A                        # 2.799
 fw.guest("CO2").status                  # "partially_accessible"
 fw.surface_area("N2").channel_asa_m2_per_g
@@ -435,6 +438,14 @@ CP2K, or Quantum ESPRESSO input, or as a RASPA2 GCMC input set (above).
 
 These are properties of the methods, not defects, and they are
 documented in the relevant functions' docstrings too.
+
+- **A SHELX `.res` is a refinement in progress.** The Void reads the
+  atoms, occupancies and symmetry as they stand in the file, including
+  any disorder parts and unassigned solvent; difference peaks (Q) are
+  not atoms and are left out. The refinement numbers shown are the ones
+  the file reports, copied, not recalculated. Files from SHELXL were
+  checked; a `.res` written by another refinement program may not carry
+  them in the same form.
 
 - **LCD and PLD don't depend on the grid; the volumes do.** The
   largest cavity diameter is the exact maximum of the distance to the
@@ -555,6 +566,7 @@ thevoid_core/
   app/             application entry point
   ui/              windows, dialogs, panels, the 3D viewer widget
   services/        structure loading, bonding, and every analysis
+    shelx/         reading SHELX .res and .ins files
     reference/     CoRE MOF 2024 index, comparison, fetching
     ml/            property models: descriptors, training, prediction
     index/         the shared index: identity, entries, licences, store
@@ -578,7 +590,7 @@ tools/             build_topology_library.py, build_coremof_index.py,
 .github/workflows  tests.yml: CI, full test suite + CLI smoke test, Python 3.11/3.12
                    release.yml: the Windows installer and the wheel, per release
 packaging/         the Windows build: PyInstaller recipe, launcher, Inno Setup script
-tests/             1436 tests, with openly licensed real-structure fixtures
+tests/             1437 tests, with openly licensed real-structure fixtures
 ```
 
 ## How to cite
