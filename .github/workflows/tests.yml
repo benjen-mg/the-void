@@ -44,11 +44,13 @@ jobs:
       # Round 52: the RASPA2 export's end-to-end tests run the real
       # program. Built from the PyPI source (about 20 s); without it
       # those tests are skipped, not failed.
+      # -std=gnu17: RASPA2 2.0.4 declares functions as f() and defines them
+      # with arguments, which C23 (the default from GCC 15) rejects.
       - name: RASPA2
         run: |
           pip download RASPA2==2.0.4 --no-deps --no-binary :all: -d /tmp/raspa
           tar xzf /tmp/raspa/RASPA2-2.0.4.tar.gz -C /tmp/raspa
-          gcc -O2 -w -fcommon -I/tmp/raspa/RASPA2-2.0.4/src /tmp/raspa/RASPA2-2.0.4/src/*.c -lm -o /tmp/raspa/simulate
+          gcc -std=gnu17 -O2 -w -fcommon -I/tmp/raspa/RASPA2-2.0.4/src /tmp/raspa/RASPA2-2.0.4/src/*.c -lm -o /tmp/raspa/simulate
           echo "RASPA_SIMULATE=/tmp/raspa/simulate" >> "$GITHUB_ENV"
           # Round 53: its bundled MOF and zeolite CIFs validate topology
           # identification (tests/test_topology_real_structures.py).
