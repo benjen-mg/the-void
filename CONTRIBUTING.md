@@ -31,10 +31,12 @@ in mind.
 
 ## Code changes
 
-The Void is licensed under CC BY-NC-ND 4.0 (see `LICENSE`), which does
-not allow modified versions to be shared. For that reason pull requests
-are not accepted. Please open an issue instead; if you have a fix in
-mind, describe it there, and the maintainer will make the change.
+The Void is licensed under the PolyForm Noncommercial License 1.0.0
+(see `LICENSE`). You may change it and share your changed version for
+non-commercial purposes. The Void itself is kept single-authored, so
+pull requests are not merged: please open an issue instead, and if you
+have a fix in mind, describe it there, and the maintainer will make the
+change.
 
 ## Running the tests
 

@@ -12,14 +12,16 @@ TITLE = "the Void"
 AUTHORS = (("Benyamin", "M. Garmejani", "Victoria University of Wellington"),)
 YEAR = 2026
 
-LICENCE_SPDX = "CC-BY-NC-ND-4.0"
-LICENCE_NAME = ("Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 "
-                "International (CC BY-NC-ND 4.0)")
-LICENCE_URL = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+#: Version 1.1.1 onward; 1.0.0 to 1.1.0 were released under CC BY-NC-ND 4.0.
+LICENCE_SPDX = "PolyForm-Noncommercial-1.0.0"
+LICENCE_NAME = "PolyForm Noncommercial License 1.0.0"
+LICENCE_URL = "https://polyformproject.org/licenses/noncommercial/1.0.0"
 LICENCE_SUMMARY = (
-    "Free for research, teaching and other non-commercial use, and to "
-    "share unchanged, with credit. Commercial use needs the author's "
-    "permission. Modified versions may not be distributed."
+    "Free for research, teaching and any other non-commercial use, "
+    "including by universities and public research organisations however "
+    "they are funded. You may share it, changed or not, for non-commercial "
+    "purposes, with the licence and its notices. Commercial use needs the "
+    "author's permission."
 )
 
 REPOSITORY_URL = "https://github.com/benjen-mg/the-void"

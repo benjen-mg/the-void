@@ -9,7 +9,7 @@ geometric analyses that matter for MOFs and other framework materials:
 pore size, accessible surface area, guest accessibility, open metal
 sites, coordination environments, and simulated powder XRD.
 
-**Version 1.1.0**. The analyses below have been checked against
+**Version 1.1.1**. The analyses below have been checked against
 analytic cases and against real deposited structures (openly licensed
 CoRE MOF 2024 structures, bundled as test fixtures; CALF-20, CCDC
 2084733; and MUF-16(Mn), CCDC 1948905, driven through every analysis
@@ -41,7 +41,7 @@ the command-line tools (`the-void-analyze` and the others below) and the
 `thevoid` Python API:
 
 ```bash
-pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.1.0"
+pip install "the-void @ git+https://github.com/benjen-mg/the-void@v1.1.1"
 the-void
 ```
 
@@ -598,17 +598,17 @@ tests/             1437 tests, with openly licensed real-structure fixtures
 If the Void, or numbers it produced, appear in a publication, please
 cite it:
 
-> B. M. Garmejani, the Void, version 1.1.0 (2026). Software, doi:10.5281/zenodo.23578711.
+> B. M. Garmejani, the Void, version 1.1.1 (2026). Software, doi:10.5281/zenodo.23578711.
 
 ```bibtex
 @software{the_void,
   author  = {M. Garmejani, Benyamin},
   title   = {the Void},
-  version = {1.1.0},
+  version = {1.1.1},
   year    = {2026},
   doi     = {10.5281/zenodo.23578711},
   url     = {https://github.com/benjen-mg/the-void},
-  note    = {Licensed CC-BY-NC-ND-4.0}
+  note    = {Licensed PolyForm-Noncommercial-1.0.0}
 }
 ```
 
@@ -621,13 +621,17 @@ Help > About the Void lists them.
 
 ## Licence
 
-The Void is licensed under the Creative Commons
-Attribution-NonCommercial-NoDerivatives 4.0 International licence
-(CC BY-NC-ND 4.0); see `LICENSE`. In short: you may use it, and copy and
-share it unchanged, for research, teaching and other non-commercial
-purposes, provided you give credit (cite it as above). Commercial use
-needs the author's permission. You may not distribute modified versions.
-It comes with no warranty.
+From version 1.1.1 the Void is licensed under the
+PolyForm Noncommercial License 1.0.0; see `LICENSE`. In short: you may use it for
+research, teaching and any other non-commercial purpose, and
+universities and public research organisations may use it however they
+are funded. You may share it, changed or unchanged, for non-commercial
+purposes, as long as the licence and the notices at the top of
+`LICENSE` go with it. Commercial use needs the author's permission. It
+comes with no warranty. Please cite it as above.
+
+Versions 1.0.0 to 1.1.0 were released under CC BY-NC-ND 4.0 and stay
+under that licence.
 
 Material that is not the author's own keeps its own licence: see
 `NOTICE.md`. The bundled CoRE MOF 2024 index (`data/coremof2024.json.gz`) is a

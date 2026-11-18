@@ -37,7 +37,7 @@ def windows_version_file() -> str | None:
     StringStruct('FileDescription', 'the Void'),
     StringStruct('FileVersion', '{VERSION}'),
     StringStruct('InternalName', 'the Void'),
-    StringStruct('LegalCopyright', 'Copyright (c) 2026 Benyamin M. Garmejani. CC BY-NC-ND 4.0'),
+    StringStruct('LegalCopyright', 'Copyright (c) 2026 Benyamin M. Garmejani. PolyForm Noncommercial 1.0.0'),
     StringStruct('OriginalFilename', 'the Void.exe'),
     StringStruct('ProductName', 'the Void'),
     StringStruct('ProductVersion', '{VERSION}')])]),

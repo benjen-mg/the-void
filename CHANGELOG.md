@@ -8,6 +8,17 @@ Version numbers: the third number changes for a fix, the second when
 something new is added, the first if results or the Python API change
 in a way that could break existing work.
 
+## 1.1.1 (19 November 2026)
+
+**New licence: PolyForm Noncommercial 1.0.0**, replacing CC BY-NC-ND 4.0,
+from this version on. Nothing else changed from 1.1.0. The Void stays free
+for research, teaching and other non-commercial use, and commercial use
+still needs permission. What changes: the licence is written for software,
+includes a patent licence, says plainly that universities and public
+research organisations may use it however they are funded, and allows
+sharing modified versions for non-commercial purposes. Versions 1.0.0 to
+1.1.0 stay under CC BY-NC-ND 4.0.
+
 ## 1.1.0 (15 November 2026)
 
 **New: SHELX files and refinement details.** For people who solve and

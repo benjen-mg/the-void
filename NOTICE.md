@@ -1,7 +1,7 @@
 # Third-party material
 
-The Void's own code, documentation and artwork are licensed under
-CC BY-NC-ND 4.0 (see LICENSE). The material below is not the author's
+The Void's own code, documentation and artwork are licensed under the
+PolyForm Noncommercial License 1.0.0 (see LICENSE). The material below is not the author's
 own. It is included under its own licence, which still applies to it:
 you may use it under that licence, from its original source, whatever
 LICENSE says.

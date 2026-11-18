@@ -1,7 +1,7 @@
 """Round 75: the repository can be published.
 
-The Void goes public under CC BY-NC-ND 4.0 (research and other
-non-commercial use only). What would go wrong unnoticed,
+The Void goes public under a non-commercial licence: CC BY-NC-ND 4.0
+until 1.1.0, the PolyForm Noncommercial License 1.0.0 from 1.1.1. What would go wrong unnoticed,
 and so is tested here:
 
 - a structure from the Cambridge Structural Database (which may not be
@@ -122,9 +122,15 @@ def test_licence_version_and_authors_agree_everywhere():
     assert [a["name"] for a in project["authors"]] == [f"{g} {f}" for g, f, _ in citation.AUTHORS]
 
     licence = (ROOT / "LICENSE").read_text(encoding="utf-8")
-    assert "CC BY-NC-ND 4.0" in licence and citation.LICENCE_URL + "legalcode" in licence
-    assert "non-commercial" in licence and "commercial purposes" in licence
-    assert "NOTICE.md" in licence
+    assert "# PolyForm Noncommercial License 1.0.0" in licence and citation.LICENCE_URL in licence
+    # The licence's own text, whole (its last definition is the last line).
+    assert licence.rstrip().endswith("requiring one of your licenses.")
+    assert "## Noncommercial Organizations" in licence and "## Patent License" in licence
+    # Its notices: each a plain-text line starting "Required Notice:".
+    notices = [line for line in licence.splitlines() if line.startswith("Required Notice:")]
+    assert any("Copyright (c)" in line and "Benyamin M. Garmejani" in line for line in notices)
+    assert f"{citation.YEAR} Benyamin M. Garmejani" in notices[0]
+    assert "NOTICE.md" in licence and "CC BY-NC-ND 4.0" in licence  # what 1.0.0-1.1.0 stay under
 
 
 def test_the_readme_and_about_cite_the_current_version():
@@ -132,7 +138,7 @@ def test_the_readme_and_about_cite_the_current_version():
     assert f"**Version {__version__}**" in readme
     assert f"> {citation.citation_text()}" in readme
     assert f"```bibtex\n{citation.bibtex()}\n```" in readme
-    assert "CC BY-NC-ND 4.0" in readme and "NOTICE.md" in readme
+    assert "PolyForm Noncommercial License 1.0.0" in readme and "NOTICE.md" in readme
     assert "CC BY-ND " not in readme  # the licence before round 75's change
 
     from thevoid_core.ui.dialogs.about_dialog import cite_html
